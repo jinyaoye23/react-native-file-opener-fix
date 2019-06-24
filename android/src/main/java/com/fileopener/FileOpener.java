@@ -1,108 +1,110 @@
 package com.fileopener;
 
-import java.io.File;
-
-import android.app.Activity;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Build;
+import android.support.v4.content.FileProvider;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-
-import com.facebook.react.bridge.NativeModule;
-import com.facebook.react.bridge.ReactApplicationContext;
-import com.facebook.react.bridge.ReactContext;
-import com.facebook.react.bridge.Callback;
 import com.facebook.react.bridge.Promise;
+import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 
-import java.util.Map;
+import org.json.JSONException;
+
+import java.io.File;
 import java.util.HashMap;
+import java.util.Map;
 
 public class FileOpener extends ReactContextBaseJavaModule {
 
-  public FileOpener(ReactApplicationContext reactContext) {
-    super(reactContext);
-  }
+    public FileOpener(ReactApplicationContext reactContext) {
+        super(reactContext);
+    }
 
-  @Override
-  public String getName() {
-    return "FileOpener";
-  }
+    @Override
+    public String getName() {
+        return "FileOpener";
+    }
 
-  @Override
-  public Map<String, Object> getConstants() {
-    final Map<String, Object> constants = new HashMap<>();
-    return constants;
-  }
+    @Override
+    public Map<String, Object> getConstants() {
+        final Map<String, Object> constants = new HashMap<>();
+        return constants;
+    }
 
-  @ReactMethod
-  public void open(String fileArg, String contentType, Promise promise) throws JSONException {
-  		File file = new File(fileArg);
+    @ReactMethod
+    public void open(String fileArg, String contentType, Promise promise) throws JSONException {
+        File file = new File(fileArg);
 
 
-  		contentType = getContentType(fileArg);
-  		if (file.exists()) {
-  			try {
-  				Uri path = Uri.fromFile(file);
-  				Intent intent = new Intent(Intent.ACTION_VIEW);
+        contentType = getContentType(fileArg);
+        if (file.exists()) {
+            try {
+                Uri path = Uri.fromFile(file);
+                Intent intent = new Intent(Intent.ACTION_VIEW);
 
-  				intent.setDataAndType(path, contentType);
+                intent.setDataAndType(path, contentType);
 
-  				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-  				getReactApplicationContext().startActivity(intent);
+                /** add by david at 2019-6-23 start */
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                    Uri contentUri = FileProvider.getUriForFile(getCurrentActivity(), "com.mglink.mgcircle", file);
+
+                    intent.setDataAndType(contentUri, FileTool.getMIMEType(file));//设置类型
+                    intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                    intent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+                }
+                /** add by david at 2019-6-23 end */
+                getReactApplicationContext().startActivity(intent);
 
                 promise.resolve("Open success!!");
-  			} catch (android.content.ActivityNotFoundException e) {
+            } catch (android.content.ActivityNotFoundException e) {
                 promise.reject("Open error!!");
-  			}
-  		} else {
+            }
+        } else {
             promise.reject("File not found");
-  		}
-  	}
+        }
+    }
 
-  	public String getContentType(String url) {
+    public String getContentType(String url) {
         String contentType = "*/*";
 
         if (url.contains(".doc") || url.contains(".docx")) {
             // Word document
             contentType = "application/msword";
 
-        } else if(url.contains(".pdf")) {
+        } else if (url.contains(".pdf")) {
             // PDF file
             contentType = "application/pdf";
 
-        } else if(url.contains(".ppt") || url.contains(".pptx")) {
+        } else if (url.contains(".ppt") || url.contains(".pptx")) {
             // Powerpoint file
             contentType = "application/vnd.ms-powerpoint";
-        } else if(url.contains(".xls") || url.contains(".xlsx")) {
+        } else if (url.contains(".xls") || url.contains(".xlsx")) {
             // Excel file
             contentType = "application/vnd.ms-excel";
-        } else if(url.contains(".rtf")) {
+        } else if (url.contains(".rtf")) {
             // RTF file
             contentType = "application/rtf";
-        } else if(url.contains(".wav") || url.contains(".mp3")) {
+        } else if (url.contains(".wav") || url.contains(".mp3")) {
             // WAV audio file
             contentType = "audio/*";
 //            contentType = "audio/x-wav";
-        } else if(url.contains(".gif")) {
+        } else if (url.contains(".gif")) {
             // GIF file
             contentType = "image/gif";
-        } else if(url.contains(".jpg") || url.contains(".jpeg")) {
+        } else if (url.contains(".jpg") || url.contains(".jpeg")) {
             // JPG file
             contentType = "image/jpeg";
-        } else if(url.contains(".png")) {
+        } else if (url.contains(".png")) {
             // PNG file
             contentType = "image/png";
-        } else if(url.contains(".txt")) {
+        } else if (url.contains(".txt")) {
             // Text file
             contentType = "text/plain";
-        } else if(url.contains(".mpg") || url.contains(".mpeg") || url.contains(".mpe") || url.contains(".mp4") || url.contains(".avi")) {
+        } else if (url.contains(".mpg") || url.contains(".mpeg") || url.contains(".mpe") || url.contains(".mp4") || url.contains(".avi")) {
             // Video files
             contentType = "video/*";
         }
