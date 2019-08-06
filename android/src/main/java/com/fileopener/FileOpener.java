@@ -50,8 +50,13 @@ public class FileOpener extends ReactContextBaseJavaModule {
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 /** add by david at 2019-6-23 start */
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                    Uri contentUri = FileProvider.getUriForFile(getCurrentActivity(), "com.mglink.mgcircle", file);
-
+                    /** modify by david at 2019-8-6 start */
+                    // authorities 更改为当前包名
+                    String authorities = AppUtils.getAppProcessName(getReactApplicationContext());
+                    // Uri contentUri = FileProvider.getUriForFile(getCurrentActivity(),
+                    // "com.mglink.mgcircle", file);
+                    Uri contentUri = FileProvider.getUriForFile(getCurrentActivity(), authorities, file);
+                    /** modify by david at 2019-8-6 end */
                     intent.setDataAndType(contentUri, FileTool.getMIMEType(file));//设置类型
                     intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
                     intent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
