@@ -1,111 +1,24 @@
 {
-  "_args": [
-    [
-      {
-        "raw": "react-native-file-opener-fix@^0.2.1",
-        "scope": null,
-        "escapedName": "react-native-file-opener-fix",
-        "name": "react-native-file-opener-fix",
-        "rawSpec": "^0.2.1",
-        "spec": ">=0.2.1 <0.3.0",
-        "type": "range"
-      },
-      "/Users/Jason/Work/mushroomRN"
-    ]
-  ],
-  "_cnpm_publish_time": 1506021268302,
-  "_from": "react-native-file-opener-fix@>=0.2.1 <0.3.0",
-  "_hasShrinkwrap": false,
-  "_id": "react-native-file-opener-fix@0.2.1",
-  "_inCache": true,
-  "_location": "/react-native-file-opener-fix",
-  "_nodeVersion": "7.4.0",
-  "_npmOperationalInternal": {
-    "host": "s3://npm-registry-packages",
-    "tmp": "tmp/react-native-file-opener-fix-0.2.1.tgz_1506021266199_0.10881798481568694"
-  },
-  "_npmUser": {
-    "name": "lchapoy",
-    "email": "luis_chapoy@hotmail.com"
-  },
-  "_npmVersion": "5.3.0",
-  "_phantomChildren": {},
-  "_requested": {
-    "raw": "react-native-file-opener-fix@^0.2.1",
-    "scope": null,
-    "escapedName": "react-native-file-opener-fix",
     "name": "react-native-file-opener-fix",
-    "rawSpec": "^0.2.1",
-    "spec": ">=0.2.1 <0.3.0",
-    "type": "range"
-  },
-  "_requiredBy": [
-    "#USER",
-    "/"
-  ],
-  "_resolved": "https://registry.npm.taobao.org/react-native-file-opener-fix/download/react-native-file-opener-fix-0.2.1.tgz",
-  "_shasum": "928feaef3dadcfcf0bfbde7c109f46d8de73ec39",
-  "_shrinkwrap": null,
-  "_spec": "react-native-file-opener-fix@^0.2.1",
-  "_where": "/Users/Jason/Work/mushroomRN",
-  "author": {
-    "name": "huang zuizui"
-  },
-  "bugs": {
-    "url": "https://github.com/huangzuizui/react-native-file-opener/issues"
-  },
-  "contributors": [
-    {
-      "name": "huang zuizui",
-      "email": "huangzuizui@gmail.com"
-    }
-  ],
-  "dependencies": {},
-  "description": "A React Native module that allows you to open a file (mp3, mp4, pdf, word, excel, dwg etc.) on your device with its default application",
-  "devDependencies": {
-    "react-native": "^0.20.0"
-  },
-  "directories": {},
-  "dist": {
-    "shasum": "928feaef3dadcfcf0bfbde7c109f46d8de73ec39",
-    "size": 5194293,
-    "noattachment": false,
-    "tarball": "http://registry.npm.taobao.org/react-native-file-opener-fix/download/react-native-file-opener-fix-0.2.1.tgz"
-  },
-  "gitHead": "e62b5a76e7ad67c041f591ea4c104cadfbf34706",
-  "homepage": "https://github.com/huangzuizui/react-native-file-opener#readme",
-  "keywords": [
-    "react-native",
-    "react-native-file-opener",
-    "react",
-    "native",
-    "file",
-    "opener",
-    "mp3",
-    "mp4",
-    "pdf",
-    "office",
-    "dwg",
-    "word",
-    "cad",
-    "excel"
-  ],
-  "license": "MIT",
-  "main": "react-native-file-opener.js",
-  "maintainers": [
-    {
-      "name": "lchapoy",
-      "email": "luis_chapoy@hotmail.com"
-    }
-  ],
-  "name": "react-native-file-opener-fix",
-  "nativePackage": true,
-  "optionalDependencies": {},
-  "publish_time": 1506021268302,
-  "readme": "ERROR: No README data found!",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/huangzuizui/react-native-file-opener.git"
-  },
-  "version": "0.2.1"
-}
+    "version": "1.0.0",
+    "description": "react-native-file-opener-fix",
+    "main": "index.js",
+    "scripts": {},
+    "repository": {
+      "type": "git",
+      "url": "git@github.com:fenglu09/react-native-file-opener-fix.git"
+    },
+    "keywords": [
+      "react",
+      "native",
+      "file",
+      "open"
+    ],
+    "license": "MIT",
+    "dependencies": {},
+    "bugs": {
+      "url": "https://github.com/fenglu09/react-native-file-opener-fix/issues"
+    },
+    "homepage": "https://github.com/fenglu09/react-native-file-opener-fix#readme",
+    "peerDependencies": {}
+  }
